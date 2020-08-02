@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+   <class name = "com.hibernate.datamodel.EmployeeAddress" table = "EMPLOYEEADD">
+      <id name = "id" type = "int" column = "id">
+         <generator class="native"/>
+      </id>
+      <component name = "address" class="com.hibernate.datamodel.Address">
+         <property name = "doorNo" column = "doorNo" type = "string"/>
+         <property name = "city" column = "city_name" type = "string"/>
+         <property name = "state" column = "state_name" type = "string"/>
+         <property name = "pincode" column = "pincode" type = "string"/>
+      </component>
+      <property name = "firstName" column = "first_name" type = "string"/>
+      <property name = "lastName" column = "last_name" type = "string"/>
+   </class>
+</hibernate-mapping>

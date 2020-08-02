@@ -30,6 +30,7 @@
       <mapping resource = "Employee.hbm.xml"/>
       <mapping class="com.hibernate.datamodel.Owner"/>
       <mapping class="com.hibernate.datamodel.Car"/>
+      <mapping resource = "EmployeeAdd.hbm.xml"/>
       
    </session-factory>
 </hibernate-configuration>

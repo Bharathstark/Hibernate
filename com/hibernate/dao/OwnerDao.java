@@ -6,6 +6,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.hibernate.config.HibernateMapUtil;
@@ -106,6 +107,30 @@ public class OwnerDao {
 		session.getTransaction().commit();
 		session.close();
 		return results;
+	} 
+	//to display only manufacturer whose name starts with 'V'
+	public static List<Car> getCarManufacturer(){
+		Session session=HibernateMapUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		String hql = "select C.Manufacturer FROM com.hibernate.datamodel.Car C where C.Manufacturer like :reg_no";
+		Query<Car> query = session.createQuery(hql);
+		query.setParameter("reg_no","v%");
+		List<Car> results = query.list();
+		session.getTransaction().commit();
+		session.close();
+		return results;
 	}
-	
+	//criteria Query
+	public static int getCountofColor(String color)
+	{
+		Session session=HibernateMapUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		return session.createCriteria(Car.class).add(Restrictions.like("color", color)).list().size();
+	}
+	public static int getCountofRegno(String regno)
+	{
+		Session session=HibernateMapUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		return session.createCriteria(Car.class).add(Restrictions.like("reg_no","%"+regno+"%")).list().size();
+	}
 }
